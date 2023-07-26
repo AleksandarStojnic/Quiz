@@ -13,13 +13,53 @@ namespace Quiz.Context
         {
             base.Seed(context);
 
-            ToDo item = new ToDo
-            {
-                Name = "ToDoItem",
-            };
+            var quizes = SeedQuizes();
 
-            context.ToDos.Add(item);
+            context.Quizes.AddRange(quizes);
             context.SaveChanges();
+        }
+
+        private List<Quiz.Models.Entities.Quiz> SeedQuizes()
+        {
+            List<Quiz.Models.Entities.Quiz> quizzes = new List<Models.Entities.Quiz>();
+
+            quizzes.Add(new Models.Entities.Quiz
+            {
+                Name = "Data Structures",
+                Questions = new List<Models.Entities.Question>
+                {
+                    new Models.Entities.Question
+                    {
+                        QuestionText = "What is a Data Structure?",
+                        Answer="A data structure is a storage format that defines the way data is stored, organized, and manipulated."
+                    },
+                    new Models.Entities.Question
+                    {
+                        QuestionText = "What is an Array?",
+                        Answer = "An array is commonly referred to as a collection of items stored at contiguous memory locations."
+                    }
+                }
+            });
+
+            quizzes.Add(new Models.Entities.Quiz
+            {
+                Name = "Geography",
+                Questions = new List<Models.Entities.Question>
+                {
+                    new Models.Entities.Question
+                    {
+                        QuestionText = " In which state can you find the Grand Canyon?",
+                        Answer="Arizona"
+                    },
+                    new Models.Entities.Question
+                    {
+                        QuestionText = "Which country is made up of 7,000 islands?",
+                        Answer = "The Philippines"
+                    }
+                }
+            });
+
+            return quizzes;
         }
     }
 }

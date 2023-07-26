@@ -1,4 +1,4 @@
-﻿using Quiz.Models;
+﻿using Quiz.Models.Entities;
 using System.Data.Entity;
 
 namespace Quiz.Context
@@ -7,7 +7,8 @@ namespace Quiz.Context
     {
         public DatabaseContext() : base("name=DefaultConnection") { }
 
-        public DbSet<ToDo> ToDos { get; set; }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Models.Entities.Quiz> Quizes { get; set; }
 
     }
 }
