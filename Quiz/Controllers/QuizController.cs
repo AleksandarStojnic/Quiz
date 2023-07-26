@@ -1,15 +1,29 @@
-﻿using System.Web.Http;
+﻿using Quiz.Interfaces;
+using Quiz.Models.Entities;
+using Quiz.Services;
+using System.Collections;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace Quiz.Controllers
 {
-    [Route("quiz/[controller]")]
     public class QuizController : ApiController
     {
-        [HttpGet]
-        [Route("test")]
-        public string GetTest()
+        private readonly IQuizService _quizService;
+
+        public QuizController(IQuizService quizService)
         {
-                return "test";
+            _quizService = quizService;
+        }
+
+        [HttpGet]
+        [Route("getallquizes")]
+        public async Task<IEnumerable<Quizz>> GetAllQuizzesAsync()
+        {
+            var result = await _quizService.GetAllQuizes();
+
+            return result;
         }
     }
 }

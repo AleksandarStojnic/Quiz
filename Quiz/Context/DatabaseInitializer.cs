@@ -19,11 +19,11 @@ namespace Quiz.Context
             context.SaveChanges();
         }
 
-        private List<Quiz.Models.Entities.Quiz> SeedQuizes()
+        private List<Quiz.Models.Entities.Quizz> SeedQuizes()
         {
-            List<Quiz.Models.Entities.Quiz> quizzes = new List<Models.Entities.Quiz>();
+            List<Quiz.Models.Entities.Quizz> quizzes = new List<Models.Entities.Quizz>();
 
-            quizzes.Add(new Models.Entities.Quiz
+            quizzes.Add(new Models.Entities.Quizz
             {
                 Name = "Data Structures",
                 Questions = new List<Models.Entities.Question>
@@ -41,7 +41,7 @@ namespace Quiz.Context
                 }
             });
 
-            quizzes.Add(new Models.Entities.Quiz
+            quizzes.Add(new Models.Entities.Quizz
             {
                 Name = "Geography",
                 Questions = new List<Models.Entities.Question>

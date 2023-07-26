@@ -8,7 +8,7 @@ namespace Quiz.Context
         public DatabaseContext() : base("name=DefaultConnection") { }
 
         public DbSet<Question> Questions { get; set; }
-        public DbSet<Models.Entities.Quiz> Quizes { get; set; }
+        public DbSet<Models.Entities.Quizz> Quizes { get; set; }
 
     }
 }
