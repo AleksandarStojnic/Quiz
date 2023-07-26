@@ -13,5 +13,7 @@ namespace Quiz.Interfaces
     {
         Task<IEnumerable<QuizNakedResponse>> GetAllQuizes();
         Task<bool> CreateQuiz(CreateQuizRequest request);
+        Task<IEnumerable<QuestionResponse>> SearchQuestions(string searchValue);
+        Task<QuizResponse> GetQuizById(int id);
     }
 }

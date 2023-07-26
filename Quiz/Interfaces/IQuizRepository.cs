@@ -9,5 +9,6 @@ namespace Quiz.Interfaces
 {
     public interface IQuizRepository : IRepository<Quizz>
     {
+        Task<Quizz> GetQuizById(int id);
     }
 }

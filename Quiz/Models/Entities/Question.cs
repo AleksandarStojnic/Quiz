@@ -6,6 +6,6 @@ namespace Quiz.Models.Entities
     {
         public string QuestionText { get; set; }
         public string Answer { get; set; }
-        List<QuizQuestion> Quizes { get; set; } = new List<QuizQuestion>();
+        public List<QuizQuestion> Quizes { get; set; } = new List<QuizQuestion>();
     }
 }

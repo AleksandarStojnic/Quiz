@@ -17,6 +17,8 @@ namespace Quiz.Configuration
                 cfg.CreateMap<Quizz, QuizNakedResponse>();
                 cfg.CreateMap<CreateQuestionRequest, Question>();
                 cfg.CreateMap<CreateQuizRequest, Quizz>();
+                cfg.CreateMap<Question, QuestionResponse>();
+                cfg.CreateMap<Quizz, QuizResponse>();  
             });
             //Create an Instance of Mapper and return that Instance
             var mapper = new Mapper(config);

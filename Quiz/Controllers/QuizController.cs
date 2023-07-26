@@ -36,5 +36,20 @@ namespace Quiz.Controllers
 
             return result;
         }
+
+        [HttpGet]
+        [Route("searchquestions")]
+        public async Task<IEnumerable<QuestionResponse>> SearchQuestions([FromUriAttribute] string searchValue)
+        {
+           return await _quizService.SearchQuestions(searchValue);
+        }
+
+        [HttpGet]
+        [Route("getsinglequiz")]
+        public async Task<QuizResponse> GetQuizById([FromUriAttribute] int id)
+        {
+            return await _quizService.GetQuizById(id);
+        }
+
     }
 }

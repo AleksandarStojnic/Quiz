@@ -22,7 +22,7 @@ namespace Quiz
 
             // Register your types, for instance using the scoped lifestyle:
             container.Register<DatabaseContext>(Lifestyle.Scoped);
-            container.Register<IRepository<Question>, Quiz.Repositories.Repository<Question>>(Lifestyle.Scoped);
+            container.Register<IQuestionRepository, QuestionRepository>(Lifestyle.Scoped);
             container.Register<IQuizRepository, QuizRepository>(Lifestyle.Scoped);
             //container.Register<IMapper, Mapper>(Lifestyle.Scoped);
             container.Register<IQuizService, QuizService>(Lifestyle.Scoped);
