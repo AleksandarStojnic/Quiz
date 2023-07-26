@@ -1,4 +1,6 @@
 ﻿using Quiz.Models.Entities;
+using Quiz.Models.Requests;
+using Quiz.Models.Responses;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,7 @@ namespace Quiz.Interfaces
 {
     public interface IQuizService
     {
-        Task<IEnumerable<Quizz>> GetAllQuizes();
+        Task<IEnumerable<QuizNakedResponse>> GetAllQuizes();
+        Task<bool> CreateQuiz(CreateQuizRequest request);
     }
 }

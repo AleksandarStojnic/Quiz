@@ -7,6 +7,8 @@ using SimpleInjector.Integration.WebApi;
 using Quiz.Models.Entities;
 using Quiz.Context;
 using System.Data.Entity;
+using AutoMapper;
+using Quiz.Repositories;
 
 namespace Quiz
 {
@@ -20,8 +22,9 @@ namespace Quiz
 
             // Register your types, for instance using the scoped lifestyle:
             container.Register<DatabaseContext>(Lifestyle.Scoped);
-            container.Register<IRepository<Question>, Quiz.Services.Repository<Question>>(Lifestyle.Scoped);
-            container.Register<IRepository<Quizz>, Quiz.Services.Repository<Quizz>>(Lifestyle.Scoped);
+            container.Register<IRepository<Question>, Quiz.Repositories.Repository<Question>>(Lifestyle.Scoped);
+            container.Register<IQuizRepository, QuizRepository>(Lifestyle.Scoped);
+            //container.Register<IMapper, Mapper>(Lifestyle.Scoped);
             container.Register<IQuizService, QuizService>(Lifestyle.Scoped);
 
             // This is an extension method from the integration package.

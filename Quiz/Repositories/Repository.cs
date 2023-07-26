@@ -8,12 +8,12 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace Quiz.Services
+namespace Quiz.Repositories
 {
     public class Repository<T> : IRepository<T> where T : EntityBase
     {
-        private readonly DatabaseContext _dbContext;
-        private readonly DbSet<T> table;
+        protected readonly DatabaseContext _dbContext;
+        protected readonly DbSet<T> table;
 
         public Repository(DatabaseContext dbContext)
         {
@@ -34,12 +34,14 @@ namespace Quiz.Services
 
         public void Create(T entity)
         {
-            table.AddOrUpdate(entity);
+            table.Add(entity);
+            _dbContext.SaveChanges();
         }
 
         public void Update(T entity)
         {
             table.AddOrUpdate(entity);
+            _dbContext.SaveChanges();
         }
 
         public void Delete(T entity)
@@ -47,6 +49,7 @@ namespace Quiz.Services
             //We will use soft delete that is why we decided on Repository pattern
             entity.Active = false;
             table.AddOrUpdate(entity);
+            _dbContext.SaveChanges();
         }
 
     }
