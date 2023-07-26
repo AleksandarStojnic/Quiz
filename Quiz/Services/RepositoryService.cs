@@ -1,4 +1,5 @@
-﻿using Quiz.Interfaces;
+﻿using Quiz.Context;
+using Quiz.Interfaces;
 using Quiz.Models.Entities;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -11,10 +12,10 @@ namespace Quiz.Services
 {
     public class Repository<T> : IRepository<T> where T : EntityBase
     {
-        private readonly DbContext _dbContext;
+        private readonly DatabaseContext _dbContext;
         private readonly DbSet<T> table;
 
-        public Repository(DbContext dbContext)
+        public Repository(DatabaseContext dbContext)
         {
             _dbContext = dbContext;
             table = dbContext.Set<T>();
