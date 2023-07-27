@@ -51,5 +51,19 @@ namespace Quiz.Controllers
             return await _quizService.GetQuizById(id);
         }
 
+        [HttpPut]
+        [Route("updatequiz")]
+        public async Task<bool> UpdateQuiz([FromBody] QuizResponse request)
+        {
+            return await _quizService.UpdateQuiz(request);
+        }
+
+        [HttpDelete]
+        [Route("deletequiz")]
+        public async Task<bool> DeleteQuiz([FromUriAttribute] int id)
+        {
+            return await _quizService.DeleteQuiz(id);
+        }
+
     }
 }

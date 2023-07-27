@@ -17,8 +17,14 @@ namespace Quiz.Configuration
                 cfg.CreateMap<Quizz, QuizNakedResponse>();
                 cfg.CreateMap<CreateQuestionRequest, Question>();
                 cfg.CreateMap<CreateQuizRequest, Quizz>();
-                cfg.CreateMap<Question, QuestionResponse>();
-                cfg.CreateMap<Quizz, QuizResponse>();  
+                cfg.CreateMap<Question, QuestionResponse>()
+                .ReverseMap();
+                cfg.CreateMap<Quizz, QuizResponse>()
+                .ReverseMap();
+                cfg.CreateMap<QuestionResponse, QuizQuestion>()
+                .ForMember(x => x.QuestionId, src => src.MapFrom(y => y.Id))
+                .ForPath(x => x.Question.QuestionText, src => src.MapFrom(y => y.QuestionText))
+                .ForPath(x => x.Question.Answer, src => src.MapFrom(y => y.Answer));
             });
             //Create an Instance of Mapper and return that Instance
             var mapper = new Mapper(config);

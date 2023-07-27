@@ -14,7 +14,7 @@ namespace Quiz.Repositories
         public async Task<Quizz> GetQuizById(int id)
         {
             //Since we are forced to use .NET Framework instead of .NET core we cannot use .ThenInclude so we will have to get questions by hand;
-            return await table.Where(x => x.Id == id).Include(x => x.Questions).FirstOrDefaultAsync();
+            return await table.Where(x => x.Id == id && x.Active).Include(x => x.Questions).FirstOrDefaultAsync();
         }
     }
 }

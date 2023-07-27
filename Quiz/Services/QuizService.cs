@@ -14,12 +14,14 @@ namespace Quiz.Services
     {
         private readonly IQuestionRepository _questionRepository;
         private readonly IQuizRepository _quizRepository;
+        private readonly IQuizQuestionRepository _quizQuestionRepository;
         private readonly IMapper _mapper;
 
-        public QuizService(IQuestionRepository questionRepository, IQuizRepository quizRepository)
+        public QuizService(IQuestionRepository questionRepository, IQuizRepository quizRepository, IQuizQuestionRepository quizQuestionRepository)
         {
             _questionRepository = questionRepository;
             _quizRepository = quizRepository;
+            _quizQuestionRepository = quizQuestionRepository;
             _mapper = MapperConfig.InitializeAutomapper();
         }
 
@@ -86,6 +88,48 @@ namespace Quiz.Services
             }
 
             return response;
+        }
+
+        public async Task<bool> UpdateQuiz(QuizResponse request)
+        {
+            var entityTemp = await _quizRepository.GetQuizById(request.Id);
+            entityTemp = _mapper.Map<QuizResponse, Quizz>(request, entityTemp);
+
+            await _quizQuestionRepository.DeleteQuizQuestions(entityTemp.Questions);
+            _quizRepository.Update(entityTemp);
+
+            //Since EF is making new records in questions table we need to do this by hand
+            foreach (var item in request.TrasformedQuestions)
+            {
+                if (item.Id != 0)
+                {
+                    var question = await _questionRepository.GetById(item.Id);
+                    question = _mapper.Map<QuestionResponse, Question>(item, question);
+                    _quizQuestionRepository.Create(new QuizQuestion()
+                    {
+                        Question = question,
+                        QuestionId = item.Id,
+                        QuizzId = request.Id
+                    });
+                }
+                else
+                {
+                    _quizQuestionRepository.Create(new QuizQuestion()
+                    {
+                        Question = _mapper.Map<Question>(item),
+                        QuizzId =request.Id
+                    });
+                }
+            }
+
+            return true;
+        }
+
+        public async Task<bool> DeleteQuiz(int quizId)
+        {
+            var entity = await _quizRepository.GetById(quizId);
+            _quizRepository.Delete(entity);
+            return true;
         }
     }
 }

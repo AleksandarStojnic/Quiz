@@ -24,6 +24,7 @@ namespace Quiz
             container.Register<DatabaseContext>(Lifestyle.Scoped);
             container.Register<IQuestionRepository, QuestionRepository>(Lifestyle.Scoped);
             container.Register<IQuizRepository, QuizRepository>(Lifestyle.Scoped);
+            container.Register<IQuizQuestionRepository, QuizQuestionRepository>(Lifestyle.Scoped);
             //container.Register<IMapper, Mapper>(Lifestyle.Scoped);
             container.Register<IQuizService, QuizService>(Lifestyle.Scoped);
 

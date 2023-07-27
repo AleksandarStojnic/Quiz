@@ -263,6 +263,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Interfaces\IQuestionRepository.cs" />
+    <Compile Include="Interfaces\IQuizQuestionRepository.cs" />
     <Compile Include="Interfaces\IQuizRepository.cs" />
     <Compile Include="Interfaces\IQuizService.cs" />
     <Compile Include="Interfaces\IRepostory.cs" />
@@ -277,6 +278,7 @@
     <Compile Include="Models\Responses\QuizResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\QuestionRepository.cs" />
+    <Compile Include="Repositories\QuizQuestionRepository.cs" />
     <Compile Include="Repositories\QuizRepository.cs" />
     <Compile Include="Services\QuizService.cs" />
     <Compile Include="Repositories\Repository.cs" />

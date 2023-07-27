@@ -15,5 +15,7 @@ namespace Quiz.Interfaces
         Task<bool> CreateQuiz(CreateQuizRequest request);
         Task<IEnumerable<QuestionResponse>> SearchQuestions(string searchValue);
         Task<QuizResponse> GetQuizById(int id);
+        Task<bool> UpdateQuiz(QuizResponse request);
+        Task<bool> DeleteQuiz(int quizId);
     }
 }
