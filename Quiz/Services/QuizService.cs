@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Quiz.Services
 {
+    //This whole project is missing global error handling and on top of that inside methods there is no error handling
     public class QuizService : IQuizService
     {
         private readonly IQuestionRepository _questionRepository;
@@ -48,6 +49,7 @@ namespace Quiz.Services
                     {
                         quiz.Questions.Add(new QuizQuestion() 
                         {
+                            //Dont do db calls inside foreach
                             Question = _mapper.Map<Question>(await _questionRepository.GetById(item)) 
                         });
                     }
@@ -99,6 +101,7 @@ namespace Quiz.Services
             _quizRepository.Update(entityTemp);
 
             //Since EF is making new records in questions table we need to do this by hand
+            //Once again calling DB inside foreach loop insted use batch create and batch update
             foreach (var item in request.TrasformedQuestions)
             {
                 if (item.Id != 0)
@@ -127,6 +130,8 @@ namespace Quiz.Services
 
         public async Task<bool> DeleteQuiz(int quizId)
         {
+            //Should have made this logic inside repository so that for delete in service you only need 1 line of code.
+            //That would be less prone to programmer error during development inside team
             var entity = await _quizRepository.GetById(quizId);
             _quizRepository.Delete(entity);
             return true;
